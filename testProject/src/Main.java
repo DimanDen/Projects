@@ -16,15 +16,6 @@ public class Main {
         Window mainWind = new Window(widthScreen, heightScreen);
         mainWind.setBounds((widthScreen-widthWind)/2, (heightScreen-heightWind)/2, widthWind, heightWind);
         mainWind.setVisible(true);
-
-//        JFrame mainFrame = new JFrame("App");
-//        MainForm mainForm = new MainForm();
-//        mainFrame.setContentPane(mainForm.panelMain);
-//        mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
-//        mainFrame.pack();
-//        mainFrame.setVisible(true);
-//        mainForm.listOfFiles.setModel(mainForm.listModel);
-//        mainForm.scrlBarList.add(mainForm.listOfFiles);
     }
 }
 

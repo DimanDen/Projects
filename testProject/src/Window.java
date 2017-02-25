@@ -70,6 +70,7 @@ public class Window extends JFrame{
                                                                tempstr += FileWorker.readFromFile((String)listModel.get(arrayOfChoosen[i]));
                                                            }
                                                            FileWorker.writeToFile(tempstr);
+                                                           JOptionPane.showMessageDialog(null, "Успешно!");
                                                            panel.updateUI();
                                                        }
                                                    }
