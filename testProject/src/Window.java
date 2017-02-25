@@ -36,6 +36,11 @@ public class Window extends JFrame{
         button_WriteToFile.setBounds(0,450,200,50);
         panel.add(button_WriteToFile);
 
+        JButton button_clearListModel = new JButton("Очистить окно найденных файлов");
+        button_clearListModel.setActionCommand("Pressed");
+        button_clearListModel.setBounds(0,650,200,50);
+        panel.add(button_clearListModel);
+
         DefaultListModel listModel = new DefaultListModel(); //Создание модели списка
         JList list = new JList(listModel); //В качестве параметра модержимого в список передаем ссылку на модель
         list.setLayoutOrientation(JList.VERTICAL);
@@ -67,13 +72,21 @@ public class Window extends JFrame{
                                                            String tempstr = "";
                                                            for(int i = 0; i < arrayOfChoosen.length; i ++)
                                                            {
-                                                               tempstr += FileWorker.readFromFile((String)listModel.get(arrayOfChoosen[i]));
+                                                              tempstr += FileWorker.readFromFile((String)listModel.get(arrayOfChoosen[i]));
                                                            }
                                                            FileWorker.writeToFile(tempstr);
                                                            JOptionPane.showMessageDialog(null, "Успешно!");
                                                            panel.updateUI();
                                                        }
                                                    }
+        );
+
+        button_clearListModel.addActionListener(new ActionListener() {
+                                                    public void actionPerformed(ActionEvent e) {
+                                                        listModel.clear();
+                                                        panel.updateUI();
+                                                    }
+                                                }
         );
 
         getContentPane().add(panel);
