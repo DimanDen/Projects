@@ -10,32 +10,14 @@ public class FileWorker {
         fileOpenDialog.showDialog(null, "Cчитать данные из файла");
         File file = fileOpenDialog.getSelectedFile();
 
-        try (FileInputStream fin = new FileInputStream(file.getPath())) {
-            System.out.println("Размер файла: " + fin.available() + " байт(а)");
-            int symb = fin.read();
-            while (symb != -1) {
-                tempStrForData += (char) symb;
-                symb = fin.read();
-            }
-            fin.close();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return tempStrForData;
+        return readFromFile(file.getPath());
     }
 
     static void writeToFile(String dataStr) {
         JFileChooser fileOpenDialog = new JFileChooser();
         fileOpenDialog.showDialog(null, "Записать данные в файл");
         File file = fileOpenDialog.getSelectedFile();
-
-        try (FileOutputStream fos = new FileOutputStream(file.getPath(), true)) {
-            byte[] buffer = dataStr.getBytes();
-            fos.write(buffer, 0, buffer.length);
-            fos.close();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        writeToFile(file.getPath(), dataStr);
     }
 
     static String getFileExtension(String fileName) {
@@ -50,15 +32,15 @@ public class FileWorker {
 
     static public String readFromFile(String directory) {
         String tempStrForData = "";
-
         try (FileInputStream fin = new FileInputStream(directory)) {
+            Reader reader = new InputStreamReader(fin, "UTF-8");
             System.out.println("Размер файла: " + fin.available() + " байт(а)");
-            int symb = fin.read();
+            int symb = reader.read();
             while (symb != -1) {
                 tempStrForData += (char) symb;
-                symb = fin.read();
+                symb = reader.read();
             }
-            fin.close();
+            reader.close();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
