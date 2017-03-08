@@ -49,9 +49,9 @@ public class FileWorker {
 
     static public void writeToFile(String directory, String dataStr) {
         try (FileOutputStream fos = new FileOutputStream(directory, true)) {
-            byte[] buffer = dataStr.getBytes();
-            fos.write(buffer, 0, buffer.length);
-            fos.close();
+            Writer writer = new OutputStreamWriter(fos, "UTF-8");
+            writer.write(dataStr);
+            writer.close();
         }
         catch (IOException ex) {
             System.out.println(ex.getMessage());
