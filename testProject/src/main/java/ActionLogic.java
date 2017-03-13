@@ -11,15 +11,14 @@ public class ActionLogic {
     public void writeToFileSelectedElements(ArrayList selectedFiles, String delimiter) {
         String tempstr = "";
 
-        for(int i = 0; i < selectedFiles.size(); i ++) {
-            if(delimiter.equals("")) {
+        for (int i = 0; i < selectedFiles.size(); i++) {
+            if (delimiter.equals("")) {
                 tempstr += "\r\n" + "\r\n" + selectedFiles.get(i) + "\r\n" + "\r\n";
-            }
-            else {
+            } else {
                 tempstr += "\r\n" + delimiter + "\r\n";
             }
 
-            tempstr += FileWorker.readFromFile((String)selectedFiles.get(i));
+            tempstr += FileWorker.readFromFile((String) selectedFiles.get(i));
         }
 
         FileWorker.writeToFile(tempstr);

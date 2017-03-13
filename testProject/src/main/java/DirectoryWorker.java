@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+
 /**
  * Created by Дмитрий33 on 18.02.2017.
  */
@@ -16,20 +17,17 @@ public class DirectoryWorker {
         return getFilesFromFolder(directory, typeOfFile);
     }
 
-    public static ArrayList getFilesFromFolder(File folder, String typeOfFile)
-    {
+    public static ArrayList getFilesFromFolder(File folder, String typeOfFile) {
         ArrayList listOfFiles = new ArrayList();
         File[] folderEntries = folder.listFiles();
 
-        for (File item : folderEntries)
-        {
-            if (item.isDirectory())
-            {
+        for (File item : folderEntries) {
+            if (item.isDirectory()) {
                 listOfFiles.addAll(getFilesFromFolder(item, typeOfFile));
                 continue;
             }
 
-            if(typeOfFile.equals("") || FileWorker.getFileExtension(item.getName()).equals(typeOfFile)) {
+            if (typeOfFile.equals("") || FileWorker.getFileExtension(item.getName()).equals(typeOfFile)) {
                 listOfFiles.add(item);
             }
         }

@@ -1,5 +1,6 @@
 import java.io.*;
 import javax.swing.JFileChooser;
+
 /**
  * Created by Дмитрий33 on 16.02.2017.
  */
@@ -25,12 +26,7 @@ public class FileWorker {
         return index == -1 ? "" : fileName.substring(index);
     }
 
-    static void createFile() {
-        JFileChooser fileOpenDialog = new JFileChooser();
-        fileOpenDialog.showDialog(null, "Создать файл");
-    }
-
-    static public String readFromFile(String directory) {
+    static String readFromFile(String directory) {
         String tempStrForData = "";
         try (FileInputStream fin = new FileInputStream(directory)) {
             Reader reader = new InputStreamReader(fin, "UTF-8");
@@ -47,13 +43,12 @@ public class FileWorker {
         return tempStrForData;
     }
 
-    static public void writeToFile(String directory, String dataStr) {
+    static void writeToFile(String directory, String dataStr) {
         try (FileOutputStream fos = new FileOutputStream(directory, true)) {
             Writer writer = new OutputStreamWriter(fos, "UTF-8");
             writer.write(dataStr);
             writer.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }

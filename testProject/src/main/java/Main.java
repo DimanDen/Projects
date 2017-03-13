@@ -14,7 +14,7 @@ public class Main {
         int heightWind = heightScreen * 2 / 3;
 
         Window mainWind = new Window(widthScreen, heightScreen);
-        mainWind.setBounds((widthScreen-widthWind)/2, (heightScreen-heightWind)/2, widthWind, heightWind);
+        mainWind.setBounds((widthScreen - widthWind) / 2, (heightScreen - heightWind) / 2, widthWind, heightWind);
         mainWind.setVisible(true);
     }
 }
