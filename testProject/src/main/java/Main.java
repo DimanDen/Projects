@@ -1,7 +1,4 @@
-import com.sun.org.apache.xpath.internal.SourceTree;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
+import Window.Window;
 
 /**
  * Created by Дмитрий33 on 16.02.2017.

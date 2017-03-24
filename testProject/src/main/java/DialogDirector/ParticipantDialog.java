@@ -1,3 +1,7 @@
+package DialogDirector;
+
+import Logic.ActionLogic;
+import Widjets.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -5,10 +9,13 @@ import java.util.ArrayList;
  * Created by Дмитрий33 on 09.03.2017.
  */
 public class ParticipantDialog implements DialogDirector {
-    ButtonWrite buttonWrite;
-    ButtonSearch buttonSearch;
+    //Fields
+
+    //Graphic elements->
     ButtonSelect buttonSelect;
     ButtonDelete buttonDelete;
+    ButtonSearch buttonSearch;
+    ButtonWrite buttonWrite;
 
     DefaultListModel listModel_FoundFiles = new DefaultListModel();
     DefaultListModel listModel_SelectedFiles = new DefaultListModel();
@@ -22,28 +29,31 @@ public class ParticipantDialog implements DialogDirector {
     TextAreaTypeOfFile textAreaTypeOfFile;
 
     LabelTypeOfFile labelTypeOfFile;
+    //<-Graphic elements
 
-    ActionLogic actionLogic = new ActionLogic();
+    ActionLogic actionLogic = new ActionLogic(); //Created for determine action for buttons
 
-    //....
+    //Methods
+    //Register methods->
     @Override
-    public void registerWrite(ButtonWrite btnView) {
-        this.buttonWrite = btnView;
+    public void registerSearch(ButtonSearch buttonSearch) {
+        this.buttonSearch = buttonSearch;
     }
 
     @Override
-    public void registerSearch(ButtonSearch btnSearch) {
-        this.buttonSearch = btnSearch;
+    public void registerWrite(ButtonWrite buttonWrite) {
+        this.buttonWrite = buttonWrite;
     }
 
     @Override
-    public void registerSelect(ButtonSelect btnSelect) {
-        this.buttonSelect = btnSelect;
+    public void registerSelect(ButtonSelect buttonSelect) {
+        this.buttonSelect = buttonSelect;
     }
 
     @Override
     public void registerDelete(ButtonDelete buttonDelete) {
         this.buttonDelete = buttonDelete;
+        this.buttonDelete.setEnabled(false);
     }
 
     @Override
@@ -80,41 +90,53 @@ public class ParticipantDialog implements DialogDirector {
         this.labelTypeOfFile = labelTypeOfFile;
     }
 
+    //<-Register methods
+
     public void write() {
-        ArrayList selectedFiles = new ArrayList();
+        ArrayList selectedFiles = new ArrayList(); //local array
 
         for (int i = 0; i < listModel_SelectedFiles.size(); i++) {
-            selectedFiles.add(listModel_SelectedFiles.get(i));
+            selectedFiles.add(listModel_SelectedFiles.get(i)); //form local array, which consist of selected files from
+            //lists
         }
 
-        actionLogic.writeToFileSelectedElements(selectedFiles
-                , "ssssss");//textAr_Delimiter.getText());
-        JOptionPane.showMessageDialog(null, "Успешно записано!");
-    }
+        actionLogic.writeToFileSelectedElements(selectedFiles //Write data to file
+                , "");//textAr_Delimiter.getText());
+        JOptionPane.showMessageDialog(null, "Успешно записано!"); //Show message of successful complete operation
+    }// End of write()
 
     public void search() {
-        ArrayList elements = actionLogic.getListOfFiles(textAreaTypeOfFile.getText());
+        ArrayList elements = actionLogic.getListOfFiles(textAreaTypeOfFile.getText()); //local array of found Files
         for (int i = 0; i < elements.size(); i++) {
-            listModel_FoundFiles.addElement(elements.get(i).toString());
+            listModel_FoundFiles.addElement(elements.get(i).toString()); //add found files to list
         }
-    }
+
+        if(listModel_SelectedFiles.size() != 0 || listModel_FoundFiles.size() != 0) { //if lists have more than 0 files
+            buttonDelete.setEnabled(true);
+        }
+    }// End of search()
 
     public void select() {
-        int[] arrayOfChoosen = listOfFoundFiles.getSelectedIndices();
+        int[] arrayOfChoosen = listOfFoundFiles.getSelectedIndices(); //local array of selected files
         for (int i = 0; i < arrayOfChoosen.length; i++) {
-            listModel_SelectedFiles.addElement(listModel_FoundFiles.get(arrayOfChoosen[i]));
+            listModel_SelectedFiles.addElement(listModel_FoundFiles.get(arrayOfChoosen[i])); //move selected files
+            //from "found" list to "selected for write" list
         }
-    }
+    }// End of select
 
     public void delete() {
         int[] arrayOfSelected = listOfSelectedFiles.getSelectedIndices();
         for (int i = 0; i < arrayOfSelected.length; i++) {
-            listModel_SelectedFiles.remove(listOfSelectedFiles.getSelectedIndex());
+            listModel_SelectedFiles.remove(listOfSelectedFiles.getSelectedIndex()); //remove all selected files
         }
 
         int[] arrayOfFound = listOfFoundFiles.getSelectedIndices();
         for (int i = 0; i < arrayOfFound.length; i++) {
-            listModel_FoundFiles.remove(listOfFoundFiles.getSelectedIndex());
+            listModel_FoundFiles.remove(listOfFoundFiles.getSelectedIndex()); //remove all selected files
         }
-    }
-}
+
+        if(listModel_SelectedFiles.size() == 0 && listModel_FoundFiles.size() == 0) {
+            buttonDelete.setEnabled(false);
+        }
+    }// End of delete()
+}// End of ParticipantDialog
