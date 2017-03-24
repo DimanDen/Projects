@@ -43,6 +43,7 @@ public class ParticipantDialog implements DialogDirector {
     @Override
     public void registerWrite(ButtonWrite buttonWrite) {
         this.buttonWrite = buttonWrite;
+        this.buttonWrite.setEnabled(false);
     }
 
     @Override
@@ -117,10 +118,13 @@ public class ParticipantDialog implements DialogDirector {
     }// End of search()
 
     public void select() {
-        int[] arrayOfChoosen = listOfFoundFiles.getSelectedIndices(); //local array of selected files
-        for (int i = 0; i < arrayOfChoosen.length; i++) {
-            listModel_SelectedFiles.addElement(listModel_FoundFiles.get(arrayOfChoosen[i])); //move selected files
+        int[] arrayOfSelected = listOfFoundFiles.getSelectedIndices(); //local array of selected files
+        for (int i = 0; i < arrayOfSelected.length; i++) {
+            listModel_SelectedFiles.addElement(listModel_FoundFiles.get(arrayOfSelected[i])); //move selected files
             //from "found" list to "selected for write" list
+        }
+        if(listModel_SelectedFiles.size() != 0) {
+            buttonWrite.setEnabled(true);
         }
     }// End of select
 
@@ -135,8 +139,12 @@ public class ParticipantDialog implements DialogDirector {
             listModel_FoundFiles.remove(listOfFoundFiles.getSelectedIndex()); //remove all selected files
         }
 
-        if(listModel_SelectedFiles.size() == 0 && listModel_FoundFiles.size() == 0) {
-            buttonDelete.setEnabled(false);
+        if(listModel_SelectedFiles.size() == 0) {
+            buttonWrite.setEnabled(false);
+            if (listModel_FoundFiles.size() == 0) {
+                buttonDelete.setEnabled(false);
+            }
         }
+
     }// End of delete()
 }// End of ParticipantDialog

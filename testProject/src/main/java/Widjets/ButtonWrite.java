@@ -15,7 +15,7 @@ public class ButtonWrite extends JButton implements Command {
 
     //Constructor
     public ButtonWrite(ActionListener actionListener, DialogDirector m, int x, int y, int width, int height) {
-        super("Записать выбранные файлы");
+        super("Записать выбранные файлы в текстовый файл");
         addActionListener(actionListener);
         mediator = m;
         mediator.registerWrite(this);

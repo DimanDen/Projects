@@ -13,7 +13,7 @@ public class ButtonDelete extends JButton implements Command {
     DialogDirector mediator;
 
     public ButtonDelete(ActionListener al, DialogDirector m, int x, int y, int width, int height) {
-        super("Удалить выбранные файлы");
+        super("Удалить выбранные файлы из списков");
         addActionListener(al);
         mediator = m;
         mediator.registerDelete(this);

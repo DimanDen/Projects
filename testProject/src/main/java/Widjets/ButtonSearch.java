@@ -13,7 +13,7 @@ public class ButtonSearch extends JButton implements Command {
 
     //Constructor
     public ButtonSearch(ActionListener al, DialogDirector m, int x, int y, int width, int height) {
-        super("Поиск файлов");
+        super("Поиск файлов в директории");
         addActionListener(al); //Add action, which will happen after click
         mediator = m;
         mediator.registerSearch(this);//registred element
