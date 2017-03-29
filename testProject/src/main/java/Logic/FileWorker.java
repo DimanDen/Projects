@@ -1,3 +1,19 @@
+/****************************************************************************
+ *                  КУРС СОВРЕМЕННЫХ ПРОБЛЕМ ИНФОРМАТИКИ                    *
+ *--------------------------------------------------------------------------*
+ * Project Type  : Graphical application                                    *
+ * Project Name  : ProgramForCreatingListing                                *
+ * Language      : Java Version 8 Update 121                                *
+ * File Name     : FileWorker.java                                          *
+ * Programmer(s) : Денщиков Д.А.                                            *
+ * Modified By   : Денщиков Д.А.                                            *
+ * Created       : 06/03/17                                                 *
+ * Last Revision : 30/03/17                                                 *
+ * Comment(s)    : Класс, содержащий методы для работы с файлами            *
+ *                                                                          *
+ *                                                                          *
+ ****************************************************************************/
+
 package Logic;
 
 import java.io.*;
