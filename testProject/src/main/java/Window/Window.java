@@ -46,6 +46,7 @@ public class Window extends JFrame implements ActionListener {
     void createGUI() {  //Method for creating GUI
 
         //Method's fields
+        //Initialization coordinates and sizes of elements ->
         int buttonStartCoordinateX = setProportionalWidth(0.01);
         int buttonStartCoordinateY = buttonStartCoordinateX;
         int buttonWidth = setProportionalWidth(0.25);
@@ -66,16 +67,17 @@ public class Window extends JFrame implements ActionListener {
         int labelStartCoordinateY = listStartCoordinateY-listHeight/2 + spaceBetweenLists+setProportionalHeight(0.38);
         int labelWidth = setProportionalWidth(0.1);
         int labelHeight = setProportionalHeight(0.025);
+        //<- Initialization coordinates and sizes of elements
 
 
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //Закрытие программы по закрытию окна
-        panel.setLayout(null);
+        panel.setLayout(null); //Layer definition
 
-        panel.add(new ButtonSearch(this, mediator,
-                buttonStartCoordinateX,
+        panel.add(new ButtonSearch(this, mediator, //Adding button on panel
+                buttonStartCoordinateX, //Coordinates
                 buttonStartCoordinateY,
-                buttonWidth,
+                buttonWidth, //Size
                 buttonHeight));
 
         panel.add(new ButtonWrite(this, mediator,
@@ -125,19 +127,17 @@ public class Window extends JFrame implements ActionListener {
 
         getContentPane().add(panel);
         setBounds(0,0,widthWind,heightWind);
-
-
     }
 
-    Integer setProportionalWidth(double value) {
+    Integer setProportionalWidth(double value) { //Calculation propportional width
         return (int)Math.floor(widthWind * value);
     }
-    Integer setProportionalHeight(double value) {
+    Integer setProportionalHeight(double value) { //Calculation proportional height
         return (int)Math.floor(heightWind * value);
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
         Command command = (Command) actionEvent.getSource();
-        command.execute();
+        command.execute(); //Call method "execute" of object which react
     }//End of actionPerformed
 }// End of Window.Window
